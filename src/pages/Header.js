@@ -9,15 +9,19 @@ import hamburg from "../assets/hamburg.png";
 const Header = () => {
   const [dropdownState, setDropdownState] = useState(false);
 
-  const handleDropdown = () => {
-    setDropdownState(!dropdownState);
+  const openDropdown = () => {
+    setDropdownState(true);
+  };
+
+  const closeDropdown = e => {
+    setDropdownState(false);
   };
 
   return (
     <>
       <header className={classes.header}>
         <Link to="/">
-          <span className={classes.logo}>
+          <span className={classes.logo} onClick={closeDropdown}>
             <img src={logo} alt="logo" />
             <h2>COZ Shopping</h2>
           </span>
@@ -27,10 +31,10 @@ const Header = () => {
           className={classes.hamburg}
           src={hamburg}
           alt="hamburg"
-          onClick={handleDropdown}
+          onClick={openDropdown}
         />
       </header>
-      {dropdownState && <Dropdown />}
+      {dropdownState && <Dropdown closeDropdown={closeDropdown} />}
     </>
   );
 };

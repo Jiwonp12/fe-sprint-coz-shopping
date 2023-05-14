@@ -5,6 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Item = ({ item, setBookmarkState, isBookmarked }) => {
+  const handleBookmark = item => {
+    const bookmark = JSON.parse(localStorage.getItem("bookmark")) || [];
+
+    const existingItemIndex = bookmark.findIndex(x => x.id === item.id);
+    const isExistingItem = existingItemIndex !== -1;
+
+    if (isExistingItem) {
+      bookmark.splice(existingItemIndex, 1);
+    } else {
+      bookmark.unshift(item);
+    }
+
+    localStorage.setItem("bookmark", JSON.stringify(bookmark));
+    setBookmarkState(JSON.parse(localStorage.getItem("bookmark")));
+  };
+
   return (
     <div className={classes.item}>
       <div className={classes.imgBox}>
@@ -17,6 +33,9 @@ const Item = ({ item, setBookmarkState, isBookmarked }) => {
           className={isBookmarked ? classes.bookcolor : classes.bookmark}
           size="lg"
           icon={faStar}
+          onClick={() => {
+            handleBookmark(item);
+          }}
         />
       </div>
       <div className={classes.firstLine}>
