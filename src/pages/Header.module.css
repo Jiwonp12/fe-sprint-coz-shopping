@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 50px;
+  background: #fefefe;
+  box-shadow: 0 3px 8px 5px #dcdcdc;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  width: 100vw;
+}
+
+.logo {
+  display: flex;
+}
+
+.logo:hover {
+  color: #7736e7;
+}
+
+.logo:active {
+  color: #551ab8;
+}
+
+h2 {
+  margin-left: 10px;
+}
+
+.hamburg {
+  margin-left: auto;
+}
+
+.hamburg:hover,
+.logo:hover,
+h2:hover {
+  cursor: pointer;
+}
