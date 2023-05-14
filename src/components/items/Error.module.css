@@ -1,0 +1,12 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.beeSad {
+  width: 100px;
+}
