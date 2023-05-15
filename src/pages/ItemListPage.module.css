@@ -1,7 +1,14 @@
+.itemListPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .itemList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   height: 100%;
+  margin-top: 40px;
 }
