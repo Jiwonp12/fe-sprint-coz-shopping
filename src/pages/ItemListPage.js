@@ -64,6 +64,7 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
 
   useEffect(() => {
     setItemListPage(data.slice(0, 12));
+    setPage(1);
   }, [data]);
 
   useEffect(() => {
@@ -102,7 +103,11 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
     timeoutRef.current = setTimeout(() => {
       setItemListPage(prev => [
         ...prev,
-        ...data.slice((page - 1) * 12, page * 12),
+        ...data
+          .filter(item =>
+            selectedType === "All" ? true : item.type === selectedType
+          )
+          .slice((page - 1) * 12, page * 12),
       ]);
       preventRef.current = true;
       setLoad(false);

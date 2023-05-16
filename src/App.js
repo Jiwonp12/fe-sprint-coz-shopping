@@ -35,7 +35,15 @@ function App() {
               />
             }
           />
-          <Route path="/bookmark" element={<BookmarkPage />} />
+          <Route
+            path="/bookmark"
+            element={
+              <BookmarkPage
+                bookmarkState={bookmarkState}
+                setBookmarkState={setBookmarkState}
+              />
+            }
+          />
         </Routes>
       </main>
       <Footer className="footer" />

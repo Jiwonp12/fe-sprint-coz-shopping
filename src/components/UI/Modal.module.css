@@ -22,7 +22,7 @@
   border-radius: 8px;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4px 20px #ffffff;
+  box-shadow: 0 4px 20px #8a8a8a;
 }
 
 .img {
@@ -43,7 +43,7 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
-  color: #ffffff;
+  color: #524242;
   cursor: pointer;
 }
 
