@@ -20,7 +20,6 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
 
   const obsRef = useRef(null);
   const preventRef = useRef(true);
-  const endRef = useRef(false);
 
   const url = "http://cozshopping.codestates-seb.link/api/v1/products";
 
@@ -68,7 +67,17 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
   }, [data]);
 
   useEffect(() => {
-    console.log(page);
+    setItemListPage(
+      data
+        .filter(item =>
+          selectedType === "All" ? true : item.type === selectedType
+        )
+        .slice(0, 12)
+    );
+    setPage(1);
+  }, [selectedType]);
+
+  useEffect(() => {
     getPost();
   }, [page]);
 
@@ -108,21 +117,17 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
         selectedType={selectedType}
       />
       <ul className={classes.itemList}>
-        {itemListPage
-          .filter(item =>
-            selectedType === "All" ? true : item.type === selectedType
-          )
-          .map(item => {
-            return (
-              <Item
-                key={item.id}
-                item={item}
-                isBookmarked={handleIsBookmarked(item)}
-                bookmarkState={bookmarkState}
-                setBookmarkState={setBookmarkState}
-              />
-            );
-          })}
+        {itemListPage.map(item => {
+          return (
+            <Item
+              key={item.id + "_" + Math.random()}
+              item={item}
+              isBookmarked={handleIsBookmarked(item)}
+              bookmarkState={bookmarkState}
+              setBookmarkState={setBookmarkState}
+            />
+          );
+        })}
       </ul>
       <div ref={obsRef}></div>
       {load && <div className={classes.loading}></div>}
