@@ -7,12 +7,27 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Item = ({ item, setBookmarkState, isBookmarked }) => {
   const [modalState, setModalState] = useState(false);
+  const [willBookmarked, setWillBookmarked] = useState(false);
 
   const handleModalOpen = () => {
     setModalState(true);
+    setWillBookmarked(isBookmarked);
   };
 
   const handleModalClose = () => {
+    if (isBookmarked && !willBookmarked) {
+      const bookmark = JSON.parse(localStorage.getItem("bookmark"));
+      const existingItemIndex = bookmark.findIndex(x => x.id === item.id);
+      bookmark.splice(existingItemIndex, 1);
+      localStorage.setItem("bookmark", JSON.stringify(bookmark));
+      setBookmarkState(JSON.parse(localStorage.getItem("bookmark")));
+    }
+    if (!isBookmarked && willBookmarked) {
+      const bookmark = JSON.parse(localStorage.getItem("bookmark")) || [];
+      bookmark.unshift(item);
+      localStorage.setItem("bookmark", JSON.stringify(bookmark));
+      setBookmarkState(JSON.parse(localStorage.getItem("bookmark")));
+    }
     setModalState(false);
   };
 
@@ -38,9 +53,9 @@ const Item = ({ item, setBookmarkState, isBookmarked }) => {
         <Modal
           imageUrl={item.image_url || item.brand_image_url}
           handleModalClose={handleModalClose}
-          isBookmarked={isBookmarked}
-          handleBookmark={() => handleBookmark(item)}
           title={item.title || item.brand_name}
+          setWillBookmarked={setWillBookmarked}
+          willBookmarked={willBookmarked}
         />
       )}
       <div className={classes.item}>

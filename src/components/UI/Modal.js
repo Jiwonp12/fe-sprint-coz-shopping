@@ -8,14 +8,18 @@ import classes from "./Modal.module.css";
 const Modal = ({
   imageUrl,
   handleModalClose,
-  isBookmarked,
-  handleBookmark,
   title,
+  setWillBookmarked,
+  willBookmarked,
 }) => {
   const handleOverlayClick = event => {
     if (event.target === event.currentTarget) {
       handleModalClose();
     }
+  };
+
+  const handleModalBookmark = () => {
+    setWillBookmarked(prev => !prev);
   };
 
   return (
@@ -31,10 +35,10 @@ const Modal = ({
         <img className={classes.img} src={imageUrl} alt="modalImg" />
         <span className={classes.title}>{title}</span>
         <FontAwesomeIcon
-          className={isBookmarked ? classes.bookcolor : classes.bookmark}
+          className={willBookmarked ? classes.bookcolor : classes.bookmark}
           size="lg"
           icon={faStar}
-          onClick={handleBookmark}
+          onClick={handleModalBookmark}
         />
       </div>
     </div>
