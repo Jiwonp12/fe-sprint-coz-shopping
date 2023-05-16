@@ -6,7 +6,7 @@ import axios from "axios";
 
 import classes from "./MainPage.module.css";
 
-const MainPage = ({ bookmarkState, setBookmarkState }) => {
+const MainPage = ({ bookmarkState, setBookmarkState, outside }) => {
   const [itemList, setItemList] = useState([]);
   const url = "http://cozshopping.codestates-seb.link/api/v1/products?count=4";
 
@@ -23,6 +23,7 @@ const MainPage = ({ bookmarkState, setBookmarkState }) => {
         itemList={itemList}
         bookmarkState={bookmarkState}
         setBookmarkState={setBookmarkState}
+        outside={outside}
       />
       <h3 className={classes.mainText}>북마크 리스트</h3>
       <MainBookmarkItems

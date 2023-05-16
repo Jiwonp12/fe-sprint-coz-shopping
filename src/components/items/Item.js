@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "../UI/Modal";
 
 import classes from "./Item.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Item = ({ item, setBookmarkState, isBookmarked }) => {
+  const [modalState, setModalState] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalState(true);
+  };
+
+  const handleModalClose = () => {
+    setModalState(false);
+  };
+
   const handleBookmark = item => {
     const bookmark = JSON.parse(localStorage.getItem("bookmark")) || [];
 
@@ -22,63 +33,75 @@ const Item = ({ item, setBookmarkState, isBookmarked }) => {
   };
 
   return (
-    <div className={classes.item}>
-      <div className={classes.imgBox}>
-        <img
-          className={classes.img}
-          src={item.image_url ? item.image_url : item.brand_image_url}
-          alt="img"
+    <>
+      {modalState && (
+        <Modal
+          imageUrl={item.image_url || item.brand_image_url}
+          handleModalClose={handleModalClose}
+          isBookmarked={isBookmarked}
+          handleBookmark={() => handleBookmark(item)}
+          title={item.title || item.brand_name}
         />
-        <FontAwesomeIcon
-          className={isBookmarked ? classes.bookcolor : classes.bookmark}
-          size="lg"
-          icon={faStar}
-          onClick={() => {
-            handleBookmark(item);
-          }}
-        />
-      </div>
-      <div className={classes.firstLine}>
-        {
-          <span className={classes.title}>
-            {item.title ? item.title : item.brand_name}
-          </span>
-        }
-        {(() => {
-          switch (item.type) {
-            case "Brand":
-              return <span className={classes.customer}>관심고객수</span>;
-            case "Product":
-              return (
-                <span className={classes.percent}>
-                  {item.discountPercentage}%
-                </span>
-              );
-            default:
-              return "";
+      )}
+      <div className={classes.item}>
+        <div className={classes.imgBox}>
+          <img
+            className={classes.img}
+            src={item.image_url ? item.image_url : item.brand_image_url}
+            alt="img"
+            onClick={handleModalOpen}
+          />
+          <FontAwesomeIcon
+            className={isBookmarked ? classes.bookcolor : classes.bookmark}
+            size="lg"
+            icon={faStar}
+            onClick={() => {
+              handleBookmark(item);
+            }}
+          />
+        </div>
+        <div className={classes.firstLine}>
+          {
+            <span className={classes.title}>
+              {item.title ? item.title : item.brand_name}
+            </span>
           }
-        })()}
-      </div>
-      <div className={classes.firstLine}>
-        <span>{item.sub_title ? item.sub_title : ""}</span>
-        <span className={classes.follower}>
           {(() => {
             switch (item.type) {
-              case "Product":
-                return `${item.price
-                  .toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
               case "Brand":
-                return item.follower
-                  .toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+                return <span className={classes.customer}>관심고객수</span>;
+              case "Product":
+                return (
+                  <span className={classes.percent}>
+                    {item.discountPercentage}%
+                  </span>
+                );
               default:
                 return "";
             }
           })()}
-        </span>
+        </div>
+        <div className={classes.firstLine}>
+          <span>{item.sub_title ? item.sub_title : ""}</span>
+          <span className={classes.follower}>
+            {(() => {
+              switch (item.type) {
+                case "Product":
+                  return `${item.price
+                    .toString()
+                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
+                case "Brand":
+                  return item.follower
+                    .toString()
+                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+                default:
+                  return "";
+              }
+            })()}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
