@@ -3,7 +3,13 @@ import Item from "./Item";
 
 import classes from "./MainListItems.module.css";
 
-const MainListItems = ({ itemList, bookmarkState, setBookmarkState }) => {
+const MainListItems = ({
+  itemList,
+  bookmarkState,
+  setBookmarkState,
+  handleAddNoti,
+  handleDelNoti,
+}) => {
   const handleIsBookmarked = item => {
     if (bookmarkState) {
       return bookmarkState.some(x => x.id === item.id);
@@ -22,6 +28,8 @@ const MainListItems = ({ itemList, bookmarkState, setBookmarkState }) => {
             isBookmarked={handleIsBookmarked(item)}
             bookmarkState={bookmarkState}
             setBookmarkState={setBookmarkState}
+            handleAddNoti={handleAddNoti}
+            handleDelNoti={handleDelNoti}
           />
         );
       })}

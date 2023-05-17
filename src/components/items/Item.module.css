@@ -1,7 +1,9 @@
 .item {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  width: 320px;
+  height: 220px;
+  margin: 0 10px;
 }
 
 .img {

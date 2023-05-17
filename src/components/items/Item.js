@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../UI/Modal";
 
 import classes from "./Item.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-const Item = ({ item, setBookmarkState, isBookmarked }) => {
+const Item = ({
+  item,
+  setBookmarkState,
+  isBookmarked,
+  handleAddNoti,
+  handleDelNoti,
+}) => {
   const [modalState, setModalState] = useState(false);
   const [willBookmarked, setWillBookmarked] = useState(false);
+
+  useEffect(() => {
+    if (modalState) {
+      document.body.classList.add("modalOpen"); // 페이지 스크롤 막기
+    } else {
+      document.body.classList.remove("modalOpen"); // 페이지 스크롤 해제
+    }
+  }, [modalState]);
 
   const handleModalOpen = () => {
     setModalState(true);
@@ -21,12 +35,14 @@ const Item = ({ item, setBookmarkState, isBookmarked }) => {
       bookmark.splice(existingItemIndex, 1);
       localStorage.setItem("bookmark", JSON.stringify(bookmark));
       setBookmarkState(JSON.parse(localStorage.getItem("bookmark")));
+      handleDelNoti();
     }
     if (!isBookmarked && willBookmarked) {
       const bookmark = JSON.parse(localStorage.getItem("bookmark")) || [];
       bookmark.unshift(item);
       localStorage.setItem("bookmark", JSON.stringify(bookmark));
       setBookmarkState(JSON.parse(localStorage.getItem("bookmark")));
+      handleAddNoti();
     }
     setModalState(false);
   };
@@ -39,8 +55,10 @@ const Item = ({ item, setBookmarkState, isBookmarked }) => {
 
     if (isExistingItem) {
       bookmark.splice(existingItemIndex, 1);
+      handleDelNoti();
     } else {
       bookmark.unshift(item);
+      handleAddNoti();
     }
 
     localStorage.setItem("bookmark", JSON.stringify(bookmark));
