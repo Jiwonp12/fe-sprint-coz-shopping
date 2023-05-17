@@ -5,13 +5,18 @@ import Item from "../components/items/Item";
 import classes from "./ItemListPage.module.css";
 import Category from "./../components/UI/Category";
 
-import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import img5 from "../assets/img5.png";
+import imgAll from "../assets/img1.png";
+import imgProduct from "../assets/img2.png";
+import imgCategory from "../assets/img3.png";
+import imgExhibition from "../assets/img4.png";
+import imgBrand from "../assets/img5.png";
 
-const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
+const ItemListPage = ({
+  bookmarkState,
+  setBookmarkState,
+  handleAddNoti,
+  handleDelNoti,
+}) => {
   const [itemListPage, setItemListPage] = useState([]);
   const [selectedType, setSelectedType] = useState("All");
   const [data, setData] = useState([]);
@@ -24,11 +29,11 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
   const url = "http://cozshopping.codestates-seb.link/api/v1/products";
 
   const categories = [
-    { img: img1, name: "전체", type: "All" },
-    { img: img2, name: "상품", type: "Product" },
-    { img: img3, name: "카테고리", type: "Category" },
-    { img: img4, name: "기획전", type: "Exhibition" },
-    { img: img5, name: "브랜드", type: "Brand" },
+    { img: imgAll, name: "전체", type: "All" },
+    { img: imgProduct, name: "상품", type: "Product" },
+    { img: imgCategory, name: "카테고리", type: "Category" },
+    { img: imgExhibition, name: "기획전", type: "Exhibition" },
+    { img: imgBrand, name: "브랜드", type: "Brand" },
   ];
 
   const handleIsBookmarked = item => {
@@ -79,7 +84,9 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
   }, [selectedType]);
 
   useEffect(() => {
-    getPost();
+    if (page !== 1) {
+      getPost();
+    }
   }, [page]);
 
   const obsHandler = entries => {
@@ -130,6 +137,8 @@ const ItemListPage = ({ bookmarkState, setBookmarkState }) => {
               isBookmarked={handleIsBookmarked(item)}
               bookmarkState={bookmarkState}
               setBookmarkState={setBookmarkState}
+              handleAddNoti={handleAddNoti}
+              handleDelNoti={handleDelNoti}
             />
           );
         })}

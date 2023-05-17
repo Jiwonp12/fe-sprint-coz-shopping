@@ -5,28 +5,33 @@ import classes from "./BookmarkPage.module.css";
 import Category from "./../components/UI/Category";
 import Error from "../components/items/Error";
 
-import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import img5 from "../assets/img5.png";
+import imgAll from "../assets/img1.png";
+import imgProduct from "../assets/img2.png";
+import imgCategory from "../assets/img3.png";
+import imgExhibition from "../assets/img4.png";
+import imgBrand from "../assets/img5.png";
 
-const BookmarkPage = ({ bookmarkState = [], setBookmarkState }) => {
+const BookmarkPage = ({
+  bookmarkState = [],
+  setBookmarkState,
+  handleAddNoti,
+  handleDelNoti,
+}) => {
   const [itemListPage, setItemListPage] = useState([]);
   const [selectedType, setSelectedType] = useState("All");
   const [page, setPage] = useState(1);
-  const [load, setLoad] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const obsRef = useRef(null);
   const preventRef = useRef(true);
-  const endRef = useRef(false);
+  // const endRef = useRef(false);
 
   const categories = [
-    { img: img1, name: "전체", type: "All" },
-    { img: img2, name: "상품", type: "Product" },
-    { img: img3, name: "카테고리", type: "Category" },
-    { img: img4, name: "기획전", type: "Exhibition" },
-    { img: img5, name: "브랜드", type: "Brand" },
+    { img: imgAll, name: "전체", type: "All" },
+    { img: imgProduct, name: "상품", type: "Product" },
+    { img: imgCategory, name: "카테고리", type: "Category" },
+    { img: imgExhibition, name: "기획전", type: "Exhibition" },
+    { img: imgBrand, name: "브랜드", type: "Brand" },
   ];
 
   const handleIsBookmarked = item => {
@@ -84,7 +89,7 @@ const BookmarkPage = ({ bookmarkState = [], setBookmarkState }) => {
 
   let timer = null;
   const getPost = () => {
-    setLoad(true);
+    setIsLoaded(true);
     if (timer) {
       clearTimeout(timer);
     }
@@ -98,7 +103,7 @@ const BookmarkPage = ({ bookmarkState = [], setBookmarkState }) => {
           .slice((page - 1) * 12, page * 12),
       ]);
       preventRef.current = true;
-      setLoad(false);
+      setIsLoaded(false);
     }, 500);
   };
 
@@ -119,6 +124,8 @@ const BookmarkPage = ({ bookmarkState = [], setBookmarkState }) => {
                 isBookmarked={handleIsBookmarked(item)}
                 bookmarkState={bookmarkState}
                 setBookmarkState={setBookmarkState}
+                handleAddNoti={handleAddNoti}
+                handleDelNoti={handleDelNoti}
               />
             );
           })
@@ -127,7 +134,7 @@ const BookmarkPage = ({ bookmarkState = [], setBookmarkState }) => {
         )}
       </ul>
       <div ref={obsRef}></div>
-      {load && <div className={classes.loading}></div>}
+      {isLoaded && <div className={classes.loading}></div>}
     </div>
   );
 };

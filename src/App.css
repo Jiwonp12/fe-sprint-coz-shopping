@@ -1,24 +1,28 @@
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  min-height: 100vh;
   height: 100%;
 }
 
 .App {
   display: flex;
+  display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: 100%;
 }
 
 .header {
   height: 10%;
+  width: 100%;
 }
 
 .main {
@@ -32,4 +36,15 @@ body {
 
 .footer {
   height: 100px;
+  width: 100%;
+}
+
+body.modalOpen {
+  overflow: hidden;
+}
+
+ul {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0px;
 }

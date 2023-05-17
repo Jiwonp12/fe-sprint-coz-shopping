@@ -1,19 +1,18 @@
 .itemListPage {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 
 .itemList {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  width: 100%;
+  width: 1360px;
   height: 100%;
-  margin-top: 40px;
-  padding-left: 100px;
+  padding-top: 40px;
 }
 
 .loading {
@@ -22,6 +21,7 @@
   width: 80px;
   height: 80px;
 }
+
 .loading:after {
   content: " ";
   display: block;
