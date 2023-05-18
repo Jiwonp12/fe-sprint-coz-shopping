@@ -2,6 +2,8 @@
 
 코드스테이츠 SEB FE 44기 솔로 과제를 위해 구현한 프로젝트입니다.
 
+![cozShop](https://github.com/Jiwonp12/fe-sprint-coz-shopping/assets/124653132/1e911a24-1037-4d6f-a7f7-9c0f6f23cb12)
+
 # Stack
 
 # 배포 링크
