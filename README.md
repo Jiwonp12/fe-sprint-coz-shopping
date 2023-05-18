@@ -10,7 +10,7 @@
 
 
 [https://jiwonp12.github.io/fe-sprint-coz-shopping/](https://jiwonp12.github.io/fe-sprint-coz-shopping/)
-배포를했는데 경로가 이상해서 로고나 드롭다운을통한 페이지 이동을 해야 메인이 표시됩니다. 왜이럴까용..
+<배포를했는데 경로가 이상해서 로고나 드롭다운을통한 페이지 이동을 해야 메인이 표시됩니다. 왜이럴까용..
 배포 링크에서 데이터는 더미 데이터로 변경했습니다.
 
 # 구조
