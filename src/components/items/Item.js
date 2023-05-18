@@ -94,11 +94,9 @@ const Item = ({
           />
         </div>
         <div className={classes.firstLine}>
-          {
-            <span className={classes.title}>
-              {item.title ? item.title : item.brand_name}
-            </span>
-          }
+          <span className={classes.title}>
+            {item.title ? item.title : item.brand_name}
+          </span>
           {(() => {
             switch (item.type) {
               case "Brand":

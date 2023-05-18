@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Item from "../components/items/Item";
 import classes from "./BookmarkPage.module.css";
-import Category from "./../components/UI/Category";
+import Category from "../components/items/Category";
 import Error from "../components/items/Error";
 
 import imgAll from "../assets/img1.png";
@@ -17,7 +17,7 @@ const BookmarkPage = ({
   handleAddNoti,
   handleDelNoti,
 }) => {
-  const [itemListPage, setItemListPage] = useState([]);
+  const [allBookmarkedData, setAllBookmarkedData] = useState([]);
   const [selectedType, setSelectedType] = useState("All");
   const [page, setPage] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,7 +47,7 @@ const BookmarkPage = ({
   };
 
   const updateData = (start, end) => {
-    setItemListPage(
+    setAllBookmarkedData(
       bookmarkState
         .filter(item =>
           selectedType === "All" ? true : item.type === selectedType
@@ -94,7 +94,7 @@ const BookmarkPage = ({
       clearTimeout(timer);
     }
     timer = setTimeout(() => {
-      setItemListPage(prev => [
+      setAllBookmarkedData(prev => [
         ...prev,
         ...bookmarkState
           .filter(item =>
@@ -108,7 +108,7 @@ const BookmarkPage = ({
   };
 
   return (
-    <div className={classes.itemListPage}>
+    <div className={classes.allBookmarkedData}>
       <Category
         categories={categories}
         handleSelectCategory={handleSelectCategory}
@@ -116,7 +116,7 @@ const BookmarkPage = ({
       />
       <ul className={classes.itemList}>
         {bookmarkState && bookmarkState.length !== 0 ? (
-          itemListPage.map(item => {
+          allBookmarkedData.map(item => {
             return (
               <Item
                 key={item.id + "_" + Math.random()}

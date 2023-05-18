@@ -1,7 +1,7 @@
 import Item from "./Item";
 import Error from "./Error";
 
-import classes from "./MainListItems.module.css";
+import classes from "./MainBookmarkItems.module.css";
 
 const MainBookmarkItems = ({
   bookmarkState,
