@@ -19,6 +19,7 @@
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 2px 2px 5px 1px #ab947f;
 }
 
 .bookmark {

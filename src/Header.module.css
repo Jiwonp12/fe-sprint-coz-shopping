@@ -3,8 +3,8 @@
   justify-content: flex-start;
   align-items: center;
   padding: 20px 50px;
-  background: #fefefe;
-  box-shadow: 0 3px 8px 5px #dcdcdc;
+  background: #e8d5c4;
+  box-shadow: 0 2px 8px 1px #706153;
   position: sticky;
   z-index: 100;
   top: 0;
@@ -17,11 +17,11 @@
 }
 
 .logo:hover {
-  color: #7736e7;
+  color: #706153;
 }
 
 .logo:active {
-  color: #551ab8;
+  color: #ab947f;
 }
 
 h2 {

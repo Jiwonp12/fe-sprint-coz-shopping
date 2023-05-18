@@ -1,10 +1,12 @@
 .footer {
-  border-top: 1px solid #dcdcdc;
+  border-top: 1px solid #ab947f;
   padding: 10px 0px;
-  background: #fefefe;
+  background: #e8d5c4;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #888888;
+  color: #000000;
+  height: 100%;
+  width: 100%;
 }

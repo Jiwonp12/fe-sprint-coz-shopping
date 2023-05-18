@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Item from "../components/items/Item";
 import classes from "./ItemListPage.module.css";
-import Category from "./../components/UI/Category";
+import Category from "../components/items/Category";
 
 import imgAll from "../assets/img1.png";
 import imgProduct from "../assets/img2.png";
@@ -17,11 +17,11 @@ const ItemListPage = ({
   handleAddNoti,
   handleDelNoti,
 }) => {
-  const [itemListPage, setItemListPage] = useState([]);
+  const [allItemListData, setAllItemListData] = useState([]);
   const [selectedType, setSelectedType] = useState("All");
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [load, setLoad] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const obsRef = useRef(null);
   const preventRef = useRef(true);
@@ -68,12 +68,12 @@ const ItemListPage = ({
   }, []);
 
   useEffect(() => {
-    setItemListPage(data.slice(0, 12));
+    setAllItemListData(data.slice(0, 12));
     setPage(1);
   }, [data]);
 
   useEffect(() => {
-    setItemListPage(
+    setAllItemListData(
       data
         .filter(item =>
           selectedType === "All" ? true : item.type === selectedType
@@ -101,14 +101,14 @@ const ItemListPage = ({
   const timeoutRef = useRef(null);
 
   const getPost = () => {
-    setLoad(true);
+    setIsLoaded(true);
     // 이전에 예약된 setTimeout이 있으면 취소
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     // 1초 후에 setShowData를 실행하는 setTimeout 예약
     timeoutRef.current = setTimeout(() => {
-      setItemListPage(prev => [
+      setAllItemListData(prev => [
         ...prev,
         ...data
           .filter(item =>
@@ -117,19 +117,19 @@ const ItemListPage = ({
           .slice((page - 1) * 12, page * 12),
       ]);
       preventRef.current = true;
-      setLoad(false);
+      setIsLoaded(false);
     }, 1000);
   };
 
   return (
-    <div className={classes.itemListPage}>
+    <div className={classes.allItemListData}>
       <Category
         categories={categories}
         handleSelectCategory={handleSelectCategory}
         selectedType={selectedType}
       />
       <ul className={classes.itemList}>
-        {itemListPage.map(item => {
+        {allItemListData.map(item => {
           return (
             <Item
               key={item.id + "_" + Math.random()}
@@ -144,7 +144,7 @@ const ItemListPage = ({
         })}
       </ul>
       <div ref={obsRef}></div>
-      {load && <div className={classes.loading}></div>}
+      {isLoaded && <div className={classes.loading}></div>}
     </div>
   );
 };
