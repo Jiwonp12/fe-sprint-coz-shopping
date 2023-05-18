@@ -8,8 +8,8 @@
 
 # 배포 링크
 
-[https://jiwonp12.github.io/](https://jiwonp12.github.io/fe-sprint-coz-shopping/)
-[https://jiwonp12.github.io/fe-sprint-coz-shopping/](https://jiwonp12.github.io/)
+
+[https://jiwonp12.github.io/fe-sprint-coz-shopping/](https://jiwonp12.github.io/fe-sprint-coz-shopping/)
 
 배포 링크 데이터는 더미 데이터를 사용했습니다.
 
