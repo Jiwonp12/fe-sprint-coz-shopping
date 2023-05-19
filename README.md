@@ -89,7 +89,7 @@ fe-sprint-coz-shopping
 
 # 기능
 
-1. Header 영역의 햄버거 버튼을 클릭하면 보이는 `Dropdwon.js` 구현.
+1. Header 영역의 햄버거 버튼을 클릭하면 보이는 `Dropdon.js` 구현.
 2. 아이템을 클릭하면 보이는 `Modal.js` 구현.
 3. 북마크 저장, 취소시 `Notify.js` 구현.
 4. 로컬스토리지로 북마크를 저장하는 기능을 구현.
